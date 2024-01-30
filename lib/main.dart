@@ -1,3 +1,6 @@
+
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 import 'package:ceklukaid/masuk.dart';
 import 'package:flutter/material.dart';
 import 'splash.dart';
@@ -6,10 +9,34 @@ import 'dashboard.dart';
 import 'detail.dart';
 import 'artikelkesehatan.dart';
 import 'halamanscan.dart';
+import 'halamanprofil.dart';
+import 'halamanperawatan.dart';
+import 'halamanchatbot.dart';
+
 
 void main() {
+  initSocket();
   runApp(const MyApp());
+
 }
+
+initSocket() {
+  IO.Socket? socket;
+  socket = IO.io("http://10.0.2.2:5000", <String, dynamic>{
+    'autoConnect': false,
+    'transports': ['websocket'],
+  });
+  socket.connect();
+  socket.onConnect((_) {
+    print('Connection established');
+    socket?.emit('message', 'test');
+  });
+  socket.onDisconnect((_) => print('Connection Disconnection'));
+  socket.onConnectError((err) => print(err));
+  socket.onError((err) => print(err));
+  socket.on('message', (data) => print(data));
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,6 +52,9 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => Dashboard(),
         '/artikel_kesehatan_detail': (context) => HealthArticleDetailPage(article: {},),
         '/scan': (context) => ScanPage(),
+        '/profil': (context) => ProfilePage(),
+        '/perawatan': (context) => PerawatanPage(detectedWound: '',),
+        '/chatbot': (context) => ChatbotPage(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(

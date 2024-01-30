@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Masukapp extends StatefulWidget {
   const Masukapp({super.key});
@@ -8,6 +9,54 @@ class Masukapp extends StatefulWidget {
 }
 
 class _MasukappState extends State<Masukapp> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    try {
+      final response = await http.post(
+        Uri.parse('http://10.0.2.2:3000/masuk'), // Menggunakan URL API yang benar
+        body: {
+          'email': emailController.text,
+          'password': passwordController.text,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Login sukses, tambahkan logika sesuai kebutuhan
+        print('Login sukses');
+
+        // Tampilkan AlertDialog
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Berhasil'),
+              content: Text('Selamat datang! Anda berhasil login.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    // Pindah ke halaman dashboard setelah menutup AlertDialog
+                    Navigator.pushNamed(context, '/dashboard');
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Login gagal, tambahkan logika sesuai kebutuhan
+        print('Login gagal: ${response.body}');
+        // Tampilkan pesan error kepada pengguna jika diperlukan
+      }
+    } catch (error) {
+      // Tangani error secara umum, tampilkan pesan kesalahan jika diperlukan
+      print('Error: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +73,7 @@ class _MasukappState extends State<Masukapp> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Alamat Email',
@@ -34,6 +84,7 @@ class _MasukappState extends State<Masukapp> {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -51,14 +102,11 @@ class _MasukappState extends State<Masukapp> {
                   child: Text("Masuk", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
-              onTap: () {
-                Navigator.pushNamed(context, '/masuk');
-              },
+              onTap: _login,
             ),
           ],
         ),
       ),
     );
-
   }
 }

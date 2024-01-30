@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ResultPage extends StatefulWidget {
   final File imageFile;
@@ -11,10 +13,12 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-  int _currentIndex = 1; // Set initial index to 1 for "Scan" tab
+  int _currentIndex = 1;
   String? woundType = '';
   String? answerQuestion1;
   String? answerQuestion2;
+  String? question1Text = 'Pertanyaan 1';
+  String? question2Text = 'Pertanyaan 2';
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class _ResultPageState extends State<ResultPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Jenis Luka: $woundType', // Display the predicted wound type
+                'Jenis Luka: $woundType',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
@@ -68,7 +72,7 @@ class _ResultPageState extends State<ResultPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Pertanyaan 1: Apakah ada material yang tertinggal?'),
+                    Text(question1Text ?? 'Pertanyaan 1'),
                     DropdownButton<String>(
                       value: answerQuestion1,
                       items: <String>['Iya', 'Tidak'].map((String value) {
@@ -93,7 +97,7 @@ class _ResultPageState extends State<ResultPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Pertanyaan 2: Apakah material berkarat?'),
+                    Text(question2Text ?? 'Pertanyaan 2'),
                     DropdownButton<String>(
                       value: answerQuestion2,
                       items: <String>['Iya', 'Tidak'].map((String value) {
@@ -112,13 +116,14 @@ class _ResultPageState extends State<ResultPage> {
                 ),
               ),
               SizedBox(height: 20),
-              // Add more questions based on the wound type
               ElevatedButton(
                 onPressed: () {
-                  // TODO: Handle action when the "Selanjutnya" button is pressed
+                  _fetchWoundPrediction();
+                  _sendUserInput();
+                  _navigateToTreatmentPage();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red, // Ganti warna tombol sesuai keinginan
+                  primary: Colors.red,
                 ),
                 child: Text('Selanjutnya'),
               ),
@@ -138,9 +143,9 @@ class _ResultPageState extends State<ResultPage> {
           if (index == 0) {
             Navigator.pushNamed(context, '/dashboard');
           } else if (index == 1) {
-            // Navigator.pushNamed(context, '/scan'); // No need to navigate again
+            // Navigator.pushNamed(context, '/scan');
           } else if (index == 2) {
-            Navigator.pushNamed(context, '/profil');
+            Navigator.pushNamed(context, '/chatbot');
           }
         },
         items: [
@@ -153,11 +158,109 @@ class _ResultPageState extends State<ResultPage> {
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.chat), // Change the icon to a chat icon
+            label: 'Chatbot', // Change the label to 'Chatbot'
           ),
         ],
       ),
     );
+  }
+
+  void _fetchWoundPrediction() async {
+    try {
+      final response = await http.get(Uri.parse('https://example.com/api/predict-wound'));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        setState(() {
+          woundType = data['predictedWoundType'];
+          _setQuestionsByWoundType(woundType);
+        });
+      } else {
+        throw Exception('Failed to fetch wound prediction');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  void _setQuestionsByWoundType(String? detectedWoundType) {
+    switch (detectedWoundType) {
+      case 'Luka tusuk':
+        setState(() {
+          question1Text = 'Apakah material penusuk berkarat?';
+          question2Text = 'Apakah ada material tertinggal didalam?';
+        });
+        break;
+      case 'Luka sayat':
+        setState(() {
+          question1Text = 'Apakah luka menembus jaringan epidermis?';
+          question2Text = 'Apakah ada material tertinggal?';
+        });
+        break;
+      case 'Luka gores':
+        setState(() {
+          question1Text = 'Apakah terdapat kotoran menempel pada luka?';
+          question2Text = 'Apakah luka gores berdiameter besar?';
+        });
+        break;
+      case 'Luka bakar':
+        setState(() {
+          question1Text = 'Apakah luka bakar terjadi pada daerah indra?';
+          question2Text = 'Apakah luka bakar besar?';
+        });
+        break;
+      default:
+      // Handle other cases or set default questions
+        break;
+    }
+  }
+
+  void _sendUserInput() async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://example.com/api/send-user-input'),
+        body: {
+          'woundType': woundType ?? '',
+          'answerQuestion1': answerQuestion1 ?? '',
+          'answerQuestion2': answerQuestion2 ?? '',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('User input sent successfully');
+        _getMedicationRecommendation();
+      } else {
+        throw Exception('Failed to send user input');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  void _getMedicationRecommendation() async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://example.com/api/get-medication-recommendation'),
+        body: {
+          'woundType': woundType ?? '',
+          'answerQuestion1': answerQuestion1 ?? '',
+          'answerQuestion2': answerQuestion2 ?? '',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        print('Medication recommendation: ${data['medication']}');
+      } else {
+        throw Exception('Failed to get medication recommendation');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  void _navigateToTreatmentPage() {
+    Navigator.pushNamed(context, '/perawatan');
   }
 }

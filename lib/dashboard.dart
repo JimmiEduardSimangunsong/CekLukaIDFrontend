@@ -209,7 +209,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.red,
         iconSize: 35,
@@ -223,7 +223,8 @@ bottomNavigationBar: BottomNavigationBar(
           } else if (index == 1) {
             Navigator.pushNamed(context, '/scan');
           } else if (index == 2) {
-            Navigator.pushNamed(context, '/profil');
+            // Update the navigation to the chatbot screen
+            Navigator.pushNamed(context, '/chatbot');
           }
         },
         items: [
@@ -236,8 +237,8 @@ bottomNavigationBar: BottomNavigationBar(
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.chat), // Change the icon to a chat icon
+            label: 'Chatbot', // Change the label to 'Chatbot'
           ),
         ],
       ),

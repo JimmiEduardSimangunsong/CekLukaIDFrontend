@@ -40,9 +40,6 @@ class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ayo Cek Luka Mu'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -95,9 +92,10 @@ class _ScanPageState extends State<ScanPage> {
           if (index == 0) {
             Navigator.pushNamed(context, '/dashboard');
           } else if (index == 1) {
-            // Navigator.pushNamed(context, '/scan'); // No need to navigate again
+            Navigator.pushNamed(context, '/scan');
           } else if (index == 2) {
-            Navigator.pushNamed(context, '/profil');
+            // Update the navigation to the chatbot screen
+            Navigator.pushNamed(context, '/chatbot');
           }
         },
         items: [
@@ -110,8 +108,8 @@ class _ScanPageState extends State<ScanPage> {
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.chat), // Change the icon to a chat icon
+            label: 'Chatbot', // Change the label to 'Chatbot'
           ),
         ],
       ),
