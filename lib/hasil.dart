@@ -1,3 +1,4 @@
+import 'package:ceklukaid/halamanperawatan.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -23,7 +24,7 @@ class _ResultPageState extends State<ResultPage> {
 
   void _fetchWoundPrediction() async {
     try {
-      var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:5000/predict'));
+      var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.3:8080/predict'));
       request.files.add(
         await http.MultipartFile.fromPath(
           'image',
@@ -198,25 +199,25 @@ class _ResultPageState extends State<ResultPage> {
 
   void _setQuestionsByWoundType(String? detectedWoundType) {
     switch (detectedWoundType) {
-      case 'Luka tusuk':
+      case 'Luka Tusuk':
         setState(() {
           question1Text = 'Apakah material penusuk berkarat?';
           question2Text = 'Apakah ada material tertinggal didalam?';
         });
         break;
-      case 'Luka sayat':
+      case 'Luka Sayat':
         setState(() {
           question1Text = 'Apakah luka menembus jaringan epidermis?';
           question2Text = 'Apakah ada material tertinggal?';
         });
         break;
-      case 'Luka gores':
+      case 'Luka Gores':
         setState(() {
           question1Text = 'Apakah terdapat kotoran menempel pada luka?';
           question2Text = 'Apakah luka gores berdiameter besar?';
         });
         break;
-      case 'Luka bakar':
+      case 'Luka Bakar':
         setState(() {
           question1Text = 'Apakah luka bakar terjadi pada daerah indra?';
           question2Text = 'Apakah luka bakar besar?';
@@ -273,6 +274,9 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   void _navigateToTreatmentPage() {
-    Navigator.pushNamed(context, '/perawatan');
-  }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PerawatanPage(detectedWound: predictionText,pertanyaan1: answerQuestion1!,pertanyaan2: answerQuestion2!,)),
+    );
+}
 }

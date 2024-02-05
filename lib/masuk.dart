@@ -15,7 +15,7 @@ class _MasukappState extends State<Masukapp> {
   Future<void> _login() async {
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/masuk'), // Menggunakan URL API yang benar
+        Uri.parse('http://192.168.1.3:3000/masuk'), // Menggunakan URL API yang benar
         body: {
           'email': emailController.text,
           'password': passwordController.text,

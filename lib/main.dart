@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         '/artikel_kesehatan_detail': (context) => HealthArticleDetailPage(article: {},),
         '/scan': (context) => ScanPage(),
         '/profil': (context) => ProfilePage(),
-        '/perawatan': (context) => PerawatanPage(detectedWound: '',),
+        // '/perawatan': (context) => PerawatanPage(detectedWound: '',),
         '/chatbot': (context) => ChatbotPage(),
       },
       title: 'Flutter Demo',

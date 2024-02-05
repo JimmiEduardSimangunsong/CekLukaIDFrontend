@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class PerawatanPage extends StatefulWidget {
   final String detectedWound;
+  final String pertanyaan1;
+  final String pertanyaan2;
 
-  const PerawatanPage({Key? key, required this.detectedWound}) : super(key: key);
+  const PerawatanPage({Key? key, required this.detectedWound,required this.pertanyaan1,required this.pertanyaan2}) : super(key: key);
 
   @override
   State<PerawatanPage> createState() => _PerawatanPageState();
@@ -14,6 +19,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
   late Future<String> initialTreatment;
   late Future<String> recommendedMedicine;
 
+
   @override
   void initState() {
     super.initState();
@@ -22,21 +28,39 @@ class _PerawatanPageState extends State<PerawatanPage> {
   }
 
   Future<String> fetchInitialTreatment() async {
-    // Ganti URL API untuk penanganan awal sesuai kebutuhan
-    // Misalnya: https://example.com/api/initial-treatment?woundType=${widget.detectedWound}
-    // Implementasikan logika panggilan API sesuai kebutuhan aplikasi
-    // Contoh sederhana:
-    await Future.delayed(Duration(seconds: 2)); // Simulasi panggilan API
-    return 'Ini adalah penanganan awal untuk ${widget.detectedWound}';
+    try {
+      final response = await http.post(Uri.parse('http://192.168.1.3:3000/penanganan'),body: {
+        'predictionText': widget.detectedWound,
+        'answerQuestion1': widget.pertanyaan1,
+        'answerQuestion2': widget.pertanyaan2,
+      },);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['data']['penangananawal'];
+      } else {
+        throw Exception('Failed to load initial treatment. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load initial treatment. Error: $e');
+    }
   }
 
   Future<String> fetchRecommendedMedicine() async {
-    // Ganti URL API untuk rekomendasi obat sesuai kebutuhan
-    // Misalnya: https://example.com/api/recommended-medicine?woundType=${widget.detectedWound}
-    // Implementasikan logika panggilan API sesuai kebutuhan aplikasi
-    // Contoh sederhana:
-    await Future.delayed(Duration(seconds: 2)); // Simulasi panggilan API
-    return 'Ini adalah rekomendasi obat untuk ${widget.detectedWound}';
+    try {
+      final response = await http.post(Uri.parse('http://192.168.1.3:3000/penanganan'),body: {
+        'predictionText': widget.detectedWound,
+        'answerQuestion1': widget.pertanyaan1,
+        'answerQuestion2': widget.pertanyaan2,
+      },);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return data['data']['rekomendasiobat'];
+      } else {
+        throw Exception('Failed to load recommended medicine. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to load recommended medicine. Error: $e');
+    }
   }
 
   @override
