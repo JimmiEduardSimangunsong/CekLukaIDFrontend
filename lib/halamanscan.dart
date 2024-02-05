@@ -2,19 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'hasil.dart';
+import 'kamera.dart'; // Import halaman kamera
 
 class ScanPage extends StatefulWidget {
-  const ScanPage({super.key});
+  const ScanPage({Key? key}) : super(key: key);
 
   @override
   _ScanPageState createState() => _ScanPageState();
 }
 
 class _ScanPageState extends State<ScanPage> {
-  int _currentIndex = 1; // Set initial index to 1 for "Scan" tab
+  int _currentIndex = 1;
   late File _pickedFile;
 
-  Future _getImage(ImageSource source) async {
+  @override
+  void initState() {
+    super.initState();
+    _pickedFile = File('assets/phone.jpg'); // Ganti dengan path gambar default Anda
+  }
+
+  Future<void> _getImageFromCamera() async {
+    final pickedImage = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CameraPage(),
+      ),
+    );
+
+    if (pickedImage != null) {
+      setState(() {
+        _pickedFile = File(pickedImage.path);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultPage(imageFile: _pickedFile),
+          ),
+        );
+      });
+    }
+  }
+
+  Future<void> _getImage(ImageSource source) async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: source);
 
@@ -32,46 +60,37 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _pickedFile = File('assets/phone.jpg'); // Replace with your custom image path
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Your App Logo
             Image.asset(
-              'assets/login.jpg', // Replace with your app logo path
+              'assets/login.jpg', // Ganti dengan path logo aplikasi Anda
               width: 300,
               height: 300,
             ),
             SizedBox(height: 20),
-            // Title
             Text(
               'Ayo Cek Luka Mu',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
-            // Camera and Gallery Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () => _getImage(ImageSource.camera),
+                  onPressed: () => _getImageFromCamera(),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red, // Change to your desired button color
+                    primary: Colors.red,
                   ),
                   child: Text('Kamera'),
                 ),
                 ElevatedButton(
                   onPressed: () => _getImage(ImageSource.gallery),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red, // Change to your desired button color
+                    primary: Colors.red,
                   ),
                   child: Text('Galeri'),
                 ),
@@ -92,9 +111,8 @@ class _ScanPageState extends State<ScanPage> {
           if (index == 0) {
             Navigator.pushNamed(context, '/dashboard');
           } else if (index == 1) {
-            Navigator.pushNamed(context, '/scan');
+            // Stay on the current page (ScanPage)
           } else if (index == 2) {
-            // Update the navigation to the chatbot screen
             Navigator.pushNamed(context, '/chatbot');
           }
         },
@@ -108,8 +126,8 @@ class _ScanPageState extends State<ScanPage> {
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat), // Change the icon to a chat icon
-            label: 'Chatbot', // Change the label to 'Chatbot'
+            icon: Icon(Icons.chat),
+            label: 'Chatbot',
           ),
         ],
       ),

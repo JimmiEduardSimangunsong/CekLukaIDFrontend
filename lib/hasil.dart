@@ -19,6 +19,41 @@ class _ResultPageState extends State<ResultPage> {
   String? answerQuestion2;
   String? question1Text = 'Pertanyaan 1';
   String? question2Text = 'Pertanyaan 2';
+  String predictionText = 'Ini Prediksi';
+
+  void _fetchWoundPrediction() async {
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:5000/predict'));
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          'image',
+          widget.imageFile.path,
+        ),
+      );
+
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(await response.stream.bytesToString());
+        print('Wound prediction: $response');
+        setState(() {
+          woundType = data['detected_objects'];
+          _setQuestionsByWoundType(woundType);
+          predictionText = woundType ??'tidak ada luka terdeteksi'; // Update predictionText
+        });
+      } else {
+        throw Exception('Failed to fetch wound prediction');
+      }
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchWoundPrediction();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +82,15 @@ class _ResultPageState extends State<ResultPage> {
               ),
               SizedBox(height: 20),
               Text(
-                'Jenis Luka: $woundType',
+                'Jenis Luka:',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
               Container(
                 width: 300,
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      woundType = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Ini Prediksi',
-                    border: OutlineInputBorder(),
-                  ),
+                child: Text(
+                  predictionText, // Gunakan variabel predictionText
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
               SizedBox(height: 20),
@@ -158,31 +186,15 @@ class _ResultPageState extends State<ResultPage> {
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat), // Change the icon to a chat icon
-            label: 'Chatbot', // Change the label to 'Chatbot'
+            icon: Icon(Icons.chat),
+            label: 'Chatbot',
           ),
         ],
       ),
     );
   }
 
-  void _fetchWoundPrediction() async {
-    try {
-      final response = await http.get(Uri.parse('https://example.com/api/predict-wound'));
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        setState(() {
-          woundType = data['predictedWoundType'];
-          _setQuestionsByWoundType(woundType);
-        });
-      } else {
-        throw Exception('Failed to fetch wound prediction');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
-  }
 
   void _setQuestionsByWoundType(String? detectedWoundType) {
     switch (detectedWoundType) {
