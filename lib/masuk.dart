@@ -15,7 +15,8 @@ class _MasukappState extends State<Masukapp> {
   Future<void> _login() async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.3:3000/masuk'), // Menggunakan URL API yang benar
+        Uri.parse(
+            'http://192.168.1.7:3000/masuk'), // Menggunakan URL API yang benar
         body: {
           'email': emailController.text,
           'password': passwordController.text,
@@ -66,8 +67,10 @@ class _MasukappState extends State<Masukapp> {
           children: [
             Image.asset(
               'assets/masuk.jpg',
-              width: 400,
-              height: 400,
+              width: MediaQuery.of(context).size.width *
+                  0.8, // Responsif - 80% dari lebar layar
+              height: MediaQuery.of(context).size.width *
+                  0.8, // Responsif - 80% dari lebar layar
             ),
             const SizedBox(height: 20),
             Container(
@@ -96,10 +99,13 @@ class _MasukappState extends State<Masukapp> {
             InkWell(
               child: Container(
                 color: const Color.fromRGBO(228, 116, 116, 1),
-                width: 360,
+                width: MediaQuery.of(context).size.width *
+                    0.8, // Responsif - 80% dari lebar layar
                 height: 50,
                 child: Center(
-                  child: Text("Masuk", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: Text("Masuk",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               onTap: _login,

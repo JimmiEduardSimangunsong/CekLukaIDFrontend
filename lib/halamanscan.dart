@@ -18,7 +18,8 @@ class _ScanPageState extends State<ScanPage> {
   @override
   void initState() {
     super.initState();
-    _pickedFile = File('assets/phone.jpg'); // Ganti dengan path gambar default Anda
+    _pickedFile =
+        File('assets/phone.jpg'); // Ganti dengan path gambar default Anda
   }
 
   Future<void> _getImageFromCamera() async {
@@ -63,40 +64,44 @@ class _ScanPageState extends State<ScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/login.jpg', // Ganti dengan path logo aplikasi Anda
-              width: 300,
-              height: 300,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Ayo Cek Luka Mu',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () => _getImageFromCamera(),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                'assets/login.jpg', // Ganti dengan path logo aplikasi Anda
+                width: MediaQuery.of(context).size.width *
+                    0.8, // Responsif - 80% dari lebar layar
+                height: MediaQuery.of(context).size.width *
+                    0.8, // Responsif - 80% dari lebar layar
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Ayo Cek Luka Mu',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () => _getImageFromCamera(),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                    ),
+                    child: Text('Kamera'),
                   ),
-                  child: Text('Kamera'),
-                ),
-                ElevatedButton(
-                  onPressed: () => _getImage(ImageSource.gallery),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                  ElevatedButton(
+                    onPressed: () => _getImage(ImageSource.gallery),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                    ),
+                    child: Text('Galeri'),
                   ),
-                  child: Text('Galeri'),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

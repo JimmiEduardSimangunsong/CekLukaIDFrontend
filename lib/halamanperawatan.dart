@@ -8,7 +8,12 @@ class PerawatanPage extends StatefulWidget {
   final String pertanyaan1;
   final String pertanyaan2;
 
-  const PerawatanPage({Key? key, required this.detectedWound,required this.pertanyaan1,required this.pertanyaan2}) : super(key: key);
+  const PerawatanPage(
+      {Key? key,
+      required this.detectedWound,
+      required this.pertanyaan1,
+      required this.pertanyaan2})
+      : super(key: key);
 
   @override
   State<PerawatanPage> createState() => _PerawatanPageState();
@@ -19,7 +24,6 @@ class _PerawatanPageState extends State<PerawatanPage> {
   late Future<String> initialTreatment;
   late Future<String> recommendedMedicine;
 
-
   @override
   void initState() {
     super.initState();
@@ -29,16 +33,20 @@ class _PerawatanPageState extends State<PerawatanPage> {
 
   Future<String> fetchInitialTreatment() async {
     try {
-      final response = await http.post(Uri.parse('http://192.168.1.3:3000/penanganan'),body: {
-        'predictionText': widget.detectedWound,
-        'answerQuestion1': widget.pertanyaan1,
-        'answerQuestion2': widget.pertanyaan2,
-      },);
+      final response = await http.post(
+        Uri.parse('http://192.168.1.3:3000/penanganan'),
+        body: {
+          'predictionText': widget.detectedWound,
+          'answerQuestion1': widget.pertanyaan1,
+          'answerQuestion2': widget.pertanyaan2,
+        },
+      );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         return data['data']['penangananawal'];
       } else {
-        throw Exception('Failed to load initial treatment. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to load initial treatment. Status code: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Failed to load initial treatment. Error: $e');
@@ -47,16 +55,20 @@ class _PerawatanPageState extends State<PerawatanPage> {
 
   Future<String> fetchRecommendedMedicine() async {
     try {
-      final response = await http.post(Uri.parse('http://192.168.1.3:3000/penanganan'),body: {
-        'predictionText': widget.detectedWound,
-        'answerQuestion1': widget.pertanyaan1,
-        'answerQuestion2': widget.pertanyaan2,
-      },);
+      final response = await http.post(
+        Uri.parse('http://192.168.1.7:3000/penanganan'),
+        body: {
+          'predictionText': widget.detectedWound,
+          'answerQuestion1': widget.pertanyaan1,
+          'answerQuestion2': widget.pertanyaan2,
+        },
+      );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         return data['data']['rekomendasiobat'];
       } else {
-        throw Exception('Failed to load recommended medicine. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to load recommended medicine. Status code: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Failed to load recommended medicine. Error: $e');
@@ -82,7 +94,10 @@ class _PerawatanPageState extends State<PerawatanPage> {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
-                  Icon(Icons.healing, size: 40, color: Colors.red), // Tambahkan ikon luka
+                  Icon(Icons.healing,
+                      size: MediaQuery.of(context).size.width * 0.2,
+                      color: Colors
+                          .red), // Responsif - Ubah ukuran ikon berdasarkan lebar layar
                 ],
               ),
             ),
@@ -92,9 +107,12 @@ class _PerawatanPageState extends State<PerawatanPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.medical_services, color: Colors.red), // Tambahkan ikon untuk "Penangan Awal"
+                      Icon(Icons.medical_services,
+                          color: Colors
+                              .red), // Tambahkan ikon untuk "Penangan Awal"
                       SizedBox(width: 8),
-                      Text('Penangan Awal', style: TextStyle(color: Colors.red)),
+                      Text('Penangan Awal',
+                          style: TextStyle(color: Colors.red)),
                     ],
                   ),
                 ),
@@ -102,9 +120,12 @@ class _PerawatanPageState extends State<PerawatanPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.local_pharmacy, color: Colors.red), // Tambahkan ikon untuk "Rekomendasi Obat"
+                      Icon(Icons.local_pharmacy,
+                          color: Colors
+                              .red), // Tambahkan ikon untuk "Rekomendasi Obat"
                       SizedBox(width: 8),
-                      Text('Rekomendasi Obat', style: TextStyle(color: Colors.red)),
+                      Text('Rekomendasi Obat',
+                          style: TextStyle(color: Colors.red)),
                     ],
                   ),
                 ),
@@ -152,7 +173,8 @@ class _PerawatanPageState extends State<PerawatanPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.red,
-        iconSize: 35,
+        iconSize: MediaQuery.of(context).size.width *
+            0.08, // Responsif - Ubah ukuran ikon berdasarkan lebar layar
         onTap: (index) {
           setState(() {
             _currentIndex = index;
@@ -163,7 +185,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
           } else if (index == 1) {
             // Navigator.pushNamed(context, '/scan');
           } else if (index == 2) {
-            Navigator.pushNamed(context, '/profil');
+            Navigator.pushNamed(context, '/chatbot');
           }
         },
         items: [
@@ -176,8 +198,8 @@ class _PerawatanPageState extends State<PerawatanPage> {
             label: 'Scan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.chat),
+            label: 'Chatbot',
           ),
         ],
       ),

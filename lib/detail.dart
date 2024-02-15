@@ -6,11 +6,12 @@ class DetailPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String imagePath = ModalRoute.of(context)!.settings.arguments as String;
+    final String imagePath =
+        ModalRoute.of(context)!.settings.arguments as String;
 
     // Find the corresponding map in woundImages list based on the image path
     final Map<String, dynamic> woundInfo = woundImages.firstWhere(
-          (element) => element['image'] == imagePath,
+      (element) => element['image'] == imagePath,
       orElse: () => {'title': '', 'content': ''},
     );
 
@@ -35,11 +36,13 @@ class DetailPages extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 8),
                   Text(
                     'Luka Sayat: Kenali Batasan $title Ringan Yang Bisa Di Obati Dirumah',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 24,
+                      fontSize: MediaQuery.of(context).size.width *
+                          0.05, // Responsif - Ukuran font sesuai dengan lebar layar
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -48,7 +51,8 @@ class DetailPages extends StatelessWidget {
                     'Batasan: $content',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).size.width *
+                          0.04, // Responsif - Ukuran font sesuai dengan lebar layar
                     ),
                   ),
                 ],

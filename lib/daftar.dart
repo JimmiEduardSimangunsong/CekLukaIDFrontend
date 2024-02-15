@@ -17,7 +17,7 @@ class _DaftarState extends State<Daftar> {
   Future<void> _daftar() async {
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:3000/daftar'),
+        Uri.parse('http://192.168.1.7:3000/daftar'),
         body: {
           'email': emailController.text,
           'password': passwordController.text,

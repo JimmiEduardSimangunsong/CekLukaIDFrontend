@@ -22,14 +22,15 @@ class _ChatbotPageState extends State<ChatbotPage> {
   }
 
   void initSocket() {
-    socket = IO.io("http://10.0.2.2:5000", <String, dynamic>{
-      'autoConnect': false,
+    socket = IO.io("http://192.168.1.7:5000", <String, dynamic>{
+      'autoConnect': true,
       'transports': ['websocket'],
     });
     socket!.connect();
     socket!.onConnect((_) {
       print('Connection established');
-      _receiveBotResponse('Hai, selamat datang di Cek Luka App! Saya Mr.Chat Luka, chatbot layanan pengguna. Bagaimana saya bisa membantu Anda hari ini?');
+      _receiveBotResponse(
+          'Hai, selamat datang di Cek Luka App! Saya Mr.Chat Luka, chatbot layanan pengguna. Bagaimana saya bisa membantu Anda hari ini?');
     });
     socket!.onDisconnect((_) => print('Connection Disconnection'));
     socket!.onConnectError((err) => print(err));
@@ -46,6 +47,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
         children: [
           Expanded(
             child: ListView.builder(
+              reverse: false,
               itemCount: _chatMessages.length,
               itemBuilder: (context, index) {
                 final message = _chatMessages[index];

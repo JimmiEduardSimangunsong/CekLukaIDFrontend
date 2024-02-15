@@ -24,7 +24,7 @@ class _ResultPageState extends State<ResultPage> {
 
   void _fetchWoundPrediction() async {
     try {
-      var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.3:8080/predict'));
+      var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.7:8080/predict'));
       request.files.add(
         await http.MultipartFile.fromPath(
           'image',
@@ -211,7 +211,7 @@ class _ResultPageState extends State<ResultPage> {
           question2Text = 'Apakah ada material tertinggal?';
         });
         break;
-      case 'Luka Gores':
+      case 'Luka Lecet':
         setState(() {
           question1Text = 'Apakah terdapat kotoran menempel pada luka?';
           question2Text = 'Apakah luka gores berdiameter besar?';

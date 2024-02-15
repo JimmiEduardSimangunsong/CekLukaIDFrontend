@@ -56,7 +56,14 @@ class _CameraPageState extends State<CameraPage> {
             print(e);
           }
         },
-        child: Icon(Icons.camera),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Icon(Icons.camera),
+            ),
+          ],
+        ),
       ),
     );
   }
