@@ -64,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(
-              height: 150,
+              height: 200,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: woundImages.length,
@@ -124,7 +124,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             SizedBox(
-              height: 200,
+              height: 300,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: healthArticles.length,

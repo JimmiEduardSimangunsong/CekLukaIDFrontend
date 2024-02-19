@@ -34,7 +34,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
   Future<String> fetchInitialTreatment() async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.3:3000/penanganan'),
+        Uri.parse('http://192.168.1.7:3000/penanganan'),
         body: {
           'predictionText': widget.detectedWound,
           'answerQuestion1': widget.pertanyaan1,
