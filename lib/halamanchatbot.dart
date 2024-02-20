@@ -108,7 +108,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
         ),
         child: Text(
           messageText,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 17), // Ukuran teks diperbesar disini (fontSize: 18)
         ),
       ),
     );
