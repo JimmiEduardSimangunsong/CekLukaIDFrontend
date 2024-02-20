@@ -34,7 +34,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
   Future<String> fetchInitialTreatment() async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.7:3000/penanganan'),
+        Uri.parse('http://ceklukaid.et.r.appspot.com/penanganan'),
         body: {
           'predictionText': widget.detectedWound,
           'answerQuestion1': widget.pertanyaan1,
@@ -56,7 +56,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
   Future<String> fetchRecommendedMedicine() async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.1.7:3000/penanganan'),
+        Uri.parse('http://ceklukaid.et.r.appspot.com/penanganan'),
         body: {
           'predictionText': widget.detectedWound,
           'answerQuestion1': widget.pertanyaan1,
@@ -112,7 +112,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
                               .red), // Tambahkan ikon untuk "Penangan Awal"
                       SizedBox(width: 8),
                       Text('Penangan Awal',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.red, fontSize: 17)),
                     ],
                   ),
                 ),
@@ -125,7 +125,7 @@ class _PerawatanPageState extends State<PerawatanPage> {
                               .red), // Tambahkan ikon untuk "Rekomendasi Obat"
                       SizedBox(width: 8),
                       Text('Rekomendasi Obat',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.red, fontSize: 17)),
                     ],
                   ),
                 ),
@@ -144,7 +144,10 @@ class _PerawatanPageState extends State<PerawatanPage> {
                       } else {
                         return SingleChildScrollView(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(snapshot.data ?? ''),
+                          child: Text(
+                            snapshot.data ?? '',
+                            style: TextStyle(fontSize: 17),
+                          ),
                         );
                       }
                     },
@@ -159,7 +162,8 @@ class _PerawatanPageState extends State<PerawatanPage> {
                       } else {
                         return SingleChildScrollView(
                           padding: EdgeInsets.all(16.0),
-                          child: Text(snapshot.data ?? ''),
+                          child: Text(snapshot.data ?? '',
+                              style: TextStyle(fontSize: 17)),
                         );
                       }
                     },

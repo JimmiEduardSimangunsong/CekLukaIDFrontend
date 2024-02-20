@@ -24,7 +24,7 @@ class _ResultPageState extends State<ResultPage> {
 
   void _fetchWoundPrediction() async {
     try {
-      var request = http.MultipartRequest('POST', Uri.parse('http://192.168.1.7:8080/predict'));
+      var request = http.MultipartRequest('POST', Uri.parse('https://wound-detection-api-for-ceklukaid-yzlgx72ieq-et.a.run.app/predict'));
       request.files.add(
         await http.MultipartFile.fromPath(
           'image',
@@ -84,14 +84,14 @@ class _ResultPageState extends State<ResultPage> {
               SizedBox(height: 20),
               Text(
                 'Jenis Luka:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
               Container(
                 width: 300,
                 child: Text(
                   predictionText, // Gunakan variabel predictionText
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
               SizedBox(height: 20),
@@ -101,7 +101,7 @@ class _ResultPageState extends State<ResultPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(question1Text ?? 'Pertanyaan 1'),
+                    Text(question1Text ?? 'Pertanyaan 1', style: TextStyle(fontSize: 15)),
                     DropdownButton<String>(
                       value: answerQuestion1,
                       items: <String>['Iya', 'Tidak'].map((String value) {
@@ -126,7 +126,8 @@ class _ResultPageState extends State<ResultPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(question2Text ?? 'Pertanyaan 2'),
+                    Text(question2Text ?? 'Pertanyaan 2'
+                    , style: TextStyle(fontSize: 15)),
                     DropdownButton<String>(
                       value: answerQuestion2,
                       items: <String>['Iya', 'Tidak'].map((String value) {
@@ -147,8 +148,8 @@ class _ResultPageState extends State<ResultPage> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _fetchWoundPrediction();
-                  _sendUserInput();
+                  // _fetchWoundPrediction();
+                  // _sendUserInput();
                   _navigateToTreatmentPage();
                 },
                 style: ElevatedButton.styleFrom(
@@ -229,49 +230,50 @@ class _ResultPageState extends State<ResultPage> {
     }
   }
 
-  void _sendUserInput() async {
-    try {
-      final response = await http.post(
-        Uri.parse('https://example.com/api/send-user-input'),
-        body: {
-          'woundType': woundType ?? '',
-          'answerQuestion1': answerQuestion1 ?? '',
-          'answerQuestion2': answerQuestion2 ?? '',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        print('User input sent successfully');
-        _getMedicationRecommendation();
-      } else {
-        throw Exception('Failed to send user input');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
-  }
-
-  void _getMedicationRecommendation() async {
-    try {
-      final response = await http.post(
-        Uri.parse('https://example.com/api/get-medication-recommendation'),
-        body: {
-          'woundType': woundType ?? '',
-          'answerQuestion1': answerQuestion1 ?? '',
-          'answerQuestion2': answerQuestion2 ?? '',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        print('Medication recommendation: ${data['medication']}');
-      } else {
-        throw Exception('Failed to get medication recommendation');
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
-  }
+  //ini tidak perlu karena dijadikan satu dibbawah untuk ambil inputan pengguna
+  // void _sendUserInput() async {
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse('https://example.com/api/send-user-input'),
+  //       body: {
+  //         'woundType': woundType ?? '',
+  //         'answerQuestion1': answerQuestion1 ?? '',
+  //         'answerQuestion2': answerQuestion2 ?? '',
+  //       },
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       print('User input sent successfully');
+  //       _getMedicationRecommendation();
+  //     } else {
+  //       throw Exception('Failed to send user input');
+  //     }
+  //   } catch (error) {
+  //     print('Error: $error');
+  //   }
+  // }
+  //
+  // void _getMedicationRecommendation() async {
+  //   try {
+  //     final response = await http.post(
+  //       Uri.parse('https://example.com/api/get-medication-recommendation'),
+  //       body: {
+  //         'woundType': woundType ?? '',
+  //         'answerQuestion1': answerQuestion1 ?? '',
+  //         'answerQuestion2': answerQuestion2 ?? '',
+  //       },
+  //     );
+  //
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> data = jsonDecode(response.body);
+  //       print('Medication recommendation: ${data['medication']}');
+  //     } else {
+  //       throw Exception('Failed to get medication recommendation');
+  //     }
+  //   } catch (error) {
+  //     print('Error: $error');
+  //   }
+  // }
 
   void _navigateToTreatmentPage() {
     Navigator.push(

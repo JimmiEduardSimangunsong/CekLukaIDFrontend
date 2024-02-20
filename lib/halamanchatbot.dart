@@ -22,7 +22,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
   }
 
   void initSocket() {
-    socket = IO.io("http://192.168.1.7:5000", <String, dynamic>{
+    socket = IO.io("https://mr-chatbot-for-ceklukaid-yzlgx72ieq-uc.a.run.app/", <String, dynamic>{
       'autoConnect': true,
       'transports': ['websocket'],
     });
