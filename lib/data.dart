@@ -3,7 +3,7 @@ final List<Map<String, dynamic>> healthArticles = [
     'title': 'Hati-Hati! Ini 6 Komplikasi Akibat Perawatan Luka yang Salah',
     'image': 'assets/artikel1.jpeg',
     'sumber': 'Siloam Hospital',
-    'content': '\n\n Komplikasi Akibat Perawatan Luka yang Salah\n\n'
+    'content': 'Komplikasi Akibat Perawatan Luka yang Salah\n\n'
     'Terdapat sejumlah komplikasi yang timbul sebagai akibat perawatan luka yang salah, di antaranya adalah pembentukan bekas luka hipertrofik dan keloid, proses penyembuhan luka yang lebih lama, infeksi, abses, selulitis, hingga sepsis. Berikut masing-masing penjelasannya.\n\n'
     '1. Penyembuhan Luka Lebih Lama\n\n'
     'Perawatan luka yang salah sering kali membuat proses penyembuhan luka menjadi lebih lama karena aliran darah dan suplai oksigen ke area luka tidak lancar. Hal tersebut dapat memicu luka kronis yang meningkatkan risiko terjadinya infeksi.\n\n'
@@ -28,7 +28,7 @@ final List<Map<String, dynamic>> healthArticles = [
     'title': 'Perawatan Luka - Tujuan, Jenis, dan Prosedur',
     'image': 'assets/artikel2.jpeg',
     'sumber': 'Halodoc',
-    'content': '\n\nPerawatan Luka\n\n'
+    'content': 'Perawatan Luka\n\n'
     'Perawatan luka adalah prosedur penting yang perlu dilakukan ketika mengalami luka atau cedera pada kulit. Kulit adalah bagian tubuh terluas dan terluar yang membentuk sekitar 16 persen dari berat badan. Oleh karena itu, luka pada kulit, terutama luka terbuka, perlu mendapatkan perawatan yang intensif. Ini karena luka terbuka dapat dengan mudah terinfeksi oleh virus dan bakteri penyebab penyakit.\n\n'
     'Meskipun perawatan ini mungkin tampak sepele, ini memiliki tujuan penting bagi kesehatan tubuh. Sebab, kulit menjadi salah satu organ penting tubuh manusia. Kulit mengatur suhu tubuh, indra, dan menghasilkan vitamin. Karena merupakan organ terluar, kulit akan rentan cedera.\n\n'
     'Tujuan Perawatan Luka\n\n'
@@ -59,7 +59,7 @@ final List<Map<String, dynamic>> healthArticles = [
     'title': 'Bagaimana Mencegah Luka Agar Tidak Infeksi',
     'image': 'assets/artikel3.png',
     'sumber': 'IHC Telemed',
-    'content': '\n\nMencegah Luka Agar Tidak Infeksi\n\n'
+    'content': 'Mencegah Luka Agar Tidak Infeksi\n\n'
   'Hampir setiap orang pasti pernah mengalami luka pada tubuhnya, baik itu luka kecil yang dangkal, hingga luka luas yang mendalam. Luka dapat terjadi karena melakukan aktivitas tertentu, apalagi yang berhubungan dengan sesuatu yang tajam atau berpotensi melukai. Luka juga dapat terjadi karena terjatuh ataupun kecelakaan.\n\n'
   'Luka yang terjadi sering kali diabaikan. Walaupun pada dasarya luka dapat sembuh dengan sendirinya, luka jangan pernah disepelekan meskipun luka yang terjadi hanya kecil. Ada beberapa upaya sederhana yang bisa dilakukan secara mandiri untuk membersihkan, merawat, hingga mencegah luka ringan agar tidak terjadi infeksi, yaitu:\n\n'
   '1. Memastikan tangan bersih sebelum membersihkan luka\n\n'
