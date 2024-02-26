@@ -203,25 +203,25 @@ class _ResultPageState extends State<ResultPage> {
       case 'Luka Tusuk':
         setState(() {
           question1Text = 'Apakah material penusuk berkarat?';
-          question2Text = 'Apakah ada material tertinggal didalam?';
+          question2Text = 'Apakah ada kotoran tertinggal didalam?';
         });
         break;
       case 'Luka Sayat':
         setState(() {
-          question1Text = 'Apakah luka menembus jaringan epidermis?';
-          question2Text = 'Apakah ada material tertinggal?';
+          question1Text = 'Apakah Robekanya dangkal atau tidak mencapai 1 cm?';
+          question2Text = 'Apakah ada perdarahan luar yg besar?';
         });
         break;
       case 'Luka Lecet':
         setState(() {
-          question1Text = 'Apakah terdapat kotoran menempel pada luka?';
-          question2Text = 'Apakah luka gores berdiameter besar?';
+          question1Text = 'Apakah ada rasa nyeri atau ketidaknyamanan di sekitar luka?';
+          question2Text = 'Ada kotoran menempel pada luka?';
         });
         break;
       case 'Luka Bakar':
         setState(() {
-          question1Text = 'Apakah luka bakar terjadi pada daerah indra?';
-          question2Text = 'Apakah luka bakar besar?';
+          question1Text = 'Apakah muncul rasa nyeri,kemerahan?';
+          question2Text = 'Apakah kulit melepuh,bengkak,kemerahan dan terasa perih?';
         });
         break;
       default:

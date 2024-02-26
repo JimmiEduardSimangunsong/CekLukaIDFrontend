@@ -84,21 +84,54 @@ final List<Map<String, dynamic>> woundImages = [
   {
     'title': 'Luka Sayat',
     'image': 'assets/sayat.jpg',
-    'content':'\n\nUkuran luka: Luka sayat yang relatif kecil dan dangkal cenderung dapat diobati di rumah. Biasanya, luka dengan panjang kurang dari satu inci dan tidak terlalu dalam bisa dianggap sebagai luka ringan.\n\n'
-'Tidak adanya pendarahan berat: Jika luka tidak mengalami pendarahan berat atau mengalir secara terus-menerus, kemungkinan besar dapat diobati di rumah. Pendarahan ringan atau berhenti setelah beberapa saat tekanan diberikan pada luka juga merupakan tanda bahwa luka mungkin tidak memerlukan perawatan medis darurat.\n\n'
-'Lokasi luka: Luka yang terletak di bagian tubuh yang tidak vital atau tidak menyebabkan kerusakan pada organ dalam cenderung bisa diobati di rumah. Namun, luka yang terletak di area seperti wajah, leher, atau area dengan pembuluh darah besar lainnya mungkin memerlukan perhatian medis lebih lanjut.\n\n'
-'Tidak adanya benda asing dalam luka: Jika luka tidak mengandung benda asing atau tidak terkontaminasi dengan bahan berbahaya, itu merupakan tanda bahwa luka mungkin dapat diobati di rumah.\n\n'
-'Tidak adanya tanda-tanda infeksi: Jika tidak ada tanda-tanda infeksi seperti kemerahan, pembengkakan, atau nanah di sekitar luka, itu menunjukkan bahwa luka mungkin bisa diatasi dengan perawatan sederhana di rumah.\n\n'
-'Kemampuan untuk membersihkan dan merawat luka secara efektif: Jika Anda merasa nyaman untuk membersihkan dan merawat luka dengan benar di rumah, itu bisa menjadi indikasi bahwa luka tidak memerlukan perawatan medis lebih lanjut.\n\n'
-'Meskipun demikian, penting untuk diingat bahwa jika Anda merasa ragu atau luka tampak serius, lebih baik berkonsultasi dengan profesional medis untuk evaluasi lebih lanjut dan saran perawatan yang tepat. Tindakan pencegahan selalu lebih baik daripada menunggu hingga masalah menjadi lebih serius.',
+    'content':'\n\nLuka Sayatan yang Harus Ditangani oleh Dokter\n\n'
+        'Luka sayatan dalam perlu ditangani oleh dokter dan sering kali membutuhkan jahitan. Pada luka sayatan yang dalam, misalnya akibat tersayat mesin pemotong, lapisan di bawah kulit dapat terlihat dan bisa terjadi perdarahan yang cepat dan banyak, terutama jika pembuluh darah besar ikut terpotong.\n\n'
+        'Selain luka sayatan dalam yang harus segera mendapatkan penanganan medis, ada juga beberapa kondisi luka sayatan yang perlu diperiksakan ke dokter, yaitu:\n\n'
+        '-Luka tampak sangat kotor dan sulit dibersihkan. Pada kondisi luka seperti ini, dokter dapat memberikan vaksin tetanus dan immunoglobulin tetanus untuk mencegah terjadinya tetanus, terutama jika belum pernah mendapat vaksin tetanus toksoid (TT) atau belum mendapat booster TT dalam 10 tahun terakhir.\n\n'
+        '-Luka berada pada daerah yang rawan atau sensitif, seperti wajah, kulit kepala, dan sekitar kemaluan; atau pada daerah sekitar persendian.\n\n'
+        '-Luka disebabkan oleh kecelakaan atau benturan kuat dan kemungkinan terdapat perdarahan yang sulit terlihat di bawah jaringan kulit.\n\n'
+        '-Terdapat demam, luka tampak kemerahan dan bengkak, atau muncul nanah dari luka. Luka seperti ini kemungkinan sudah terinfeksi sehingga memerlukan penanganan dari dokter, misalnya berupa pemberian antibiotik.\n\n'
+        '-Perdarahan tidak berhenti setelah luka ditekan selama lebih dari 10 menit atau darah keluar dengan deras.\n\n'
+        '-Nyeri pada luka tidak hilang meski sudah minum obat antinyeri.\n\n'
+        '-Mati rasa pada area sekitar luka.\n\n'
+        '-Luka tidak kunjung sembuh hingga berminggu-minggu.\n\n',
   },
   {
     'title': 'Luka Tusuk',
     'image': 'assets/tusuk.jpg',
-    'content':'\n\n Kedalaman luka: Luka tusuk yang dangkal, hanya menembus lapisan kulit luar, cenderung dapat dianggap ringan dan diobati di rumah. Namun, luka yang lebih dalam, terutama jika melibatkan struktur dalam seperti otot atau organ, memerlukan perhatian medis lebih serius.\n\n'
-    'Lokasi luka: Seperti pada luka sayat, lokasi luka tusuk juga merupakan pertimbangan penting. Luka tusuk di area tubuh yang sensitif atau vital seperti leher, dada, atau perut mungkin memerlukan perawatan medis lebih lanjut.\n\n'
-    'Benda asing dalam luka: Jika luka tusuk terkontaminasi dengan benda asing seperti serpihan kaca atau logam, bisa meningkatkan risiko infeksi. Pembersihan luka dan penghapusan benda asing mungkin memerlukan penanganan medis yang tepat.\n\n'
-    'Pendarahan: Jika luka tusuk mengalami pendarahan berat atau terus-menerus, itu bisa menjadi tanda bahwa luka memerlukan perawatan medis lebih serius.\n\n',
+    'content':'\n\n Penyebab Luka Tusuk'
+    'Luka tusuk dapat terjadi ketika benda runcing atau tajam menembus kulit. Pada kondisi yang parah, benda tajam juga dapat menancap atau menembus hingga keluar dari tubuh.Luka tusuk paling sering terjadi akibat kondisi-kondisi berikut:\n\n'
+    '-Menginjak paku\n\n'
+    '-Menjadi korban penusukan\n\n'
+    '-Mengalami kecelakaan\n\n'
+    '-Tergigit hewan\n\n'
+    '-Terjatuh dan menimpa benda tajam\n\n'
+    '-Tertusuk terumbu karang\n\n'
+
+    'Gejala Luka Tusuk\n\n'
+    'Gejala akibat luka tusuk tergantung pada jenis benda yang menusuk, kedalaman tusukan, dan area tubuh yang terkena. Namun, luka tusuk umumnya ditandai dengan gejala-gejala berikut:\n\n'
+    '-Nyeri\n\n'
+    '-Pendarahan\n\n'
+    '-Bagian yang tertusuk sulit digerakkan\n\n'
+    '-Sensasi kesemutan di dekat area tusukan\n\n'
+    '-Perut mengembung (distensi) jika perut terkena tusukan\n\n'
+    '-Denyut nadi cepat\n\n'
+    '-Sesak napas, jika perut atau dada terkena tusukan\n\n'
+    'Selain itu, luka tusuk rentan terinfeksi, terutama jika disebabkan oleh tusukan dari benda yang berkarat, atau bila luka tidak segera diobati. Luka tusuk yang terinfeksi bisa menimbulkan gejala berikut:\n\n'
+    '-Kemerahan dan nyeri\n\n'
+    '-Bengkak atau sensasi hangat di area yang tertusuk\n\n'
+    '-Keluar nanah\n\n'
+    '-Demam\n\n'
+
+    'Kapan harus ke dokter?\n\n'
+    'Luka tusuk yang parah bisa mengancam nyawa dan memerlukan pertolongan medis di IGD rumah sakit. Berikut adalah luka tusuk yang tergolong kondisi darurat:\n\n'
+    '-Luka mengeluarkan darah yang banyak\n\n'
+    '-Darah memancur dari luka tusuk, yang bisa menjadi tanda luka tusuk mengenai pembuluh darah arteri\n\n'
+    '-Luka tusuk mengenai dada, perut, kepala, wajah, dan leher\n\n'
+    '-Luka tusuk menyebabkan kelumpuhan pada lengan atau kaki\n\n'
+    '-Otot atau tulang terlihat dari luka tusuk\n\n'
+    '-Benda menancap pada luka tusuk\n\n'
+    '-Luka tusuk sudah terjadi lebih dari 24 jam dan timbul gejala-gejala infeksi',
   },
   {
     'title': 'Luka Lecet',
